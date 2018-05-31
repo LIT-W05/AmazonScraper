@@ -1,0 +1,37 @@
+﻿@using AmazonScraper.API
+@model WebApplication1.Models.HomePageViewModel
+
+<div class="row">
+    <form action="/home">
+        <div class="col-md-10">
+            <input value="@Model.SearchText" type="text" name="searchtext" class="form-control input-lg" placeholder="Search Amazom" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-lg"> Search</button>
+        </div>
+</form>
+</div>
+
+@if (Model.Items != null)
+{
+    <table class="table table-bordered" style="margin-top: 40px;">
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td><img src="@item.ImageUrl" /></td>
+                <td>
+                    <a href="@item.Url">@item.Title</a>
+                </td>
+                <td>
+                    @item.Price.ToString("C")
+                </td>
+            </tr>
+        }
+    </table>
+}
